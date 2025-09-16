@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schedule Camp Booking</title>
+</head>
+<body>
+<h1 th:text="'Welcome ' + ${loggedInUser}"></h1>
+<h1>Schedule Camp Booking</h1>
+<form th:action="@{/booking/add}" method="post">
+    <div>
+        <label for="bookingname">Booking Name:</label>
+        <input type="text" id="bookingname" name="bookingname" required>
+    </div>
+    <div>
+        <label for="bookingdate">Booking Date:</label>
+        <input type="date" id="bookingdate" name="bookingdate" required>
+    </div>
+    <div>
+        <label for="foodrequired">Food:</label>
+        <input type="hidden" name="foodrequired" value="false">
+        <input type="checkbox" id="foodrequired" name="foodrequired" value="true">
+    </div>
+    <div>
+        <label for="drinksrequired">Drinks:</label>
+        <input type="hidden" name="drinksrequired" value="false">
+        <input type="checkbox" id="drinksrequired" name="drinksrequired" value="true">
+    </div>
+    <div>
+        <label for="bonfirerequired">Bonfire:</label>
+        <input type="hidden" name="bonfirerequired" value="false">
+        <input type="checkbox" id="bonfirerequired" name="bonfirerequired" value="true">
+    </div>
+    <div>
+        <button type="submit">Add Booking</button>
+    </div>
+</form>
+
+<h2>All Bookings</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Booking Name</th>
+        <th>Booking Date</th>
+        <th>Booking User</th>
+        <th>Food</th>
+        <th>Drinks</th>
+        <th>Bonfire</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.bookingname}"></td>
+        <td th:text="${booking.bookingdate}"></td>
+        <td th:text="${booking.bookingusernam}"></td>
+        <td th:text="${booking.foodrequired ? 'Yes' : 'No'}"></td>
+        <td th:text="${booking.drinksrequired ? 'Yes' : 'No'}"></td>
+        <td th:text="${booking.bonfirerequired ? 'Yes' : 'No'}"></td>
+        <td th:text="${booking.cost}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
